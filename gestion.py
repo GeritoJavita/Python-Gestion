@@ -53,7 +53,10 @@ def ver_estadisticas(inventario):
     producto_mas_caro = max(inventario, key=lambda x: inventario[x]['precio'])
     producto_mas_barato = min(inventario, key=lambda x: inventario[x]['precio'])
     promedio_precios = sum(item['precio'] for item in inventario.values()) / len(inventario)
+
+    #Exprecion geometrica para el promedio de precios geometricos para cantidades del inventario
     geometrica_cantidades = math.exp(sum(math.log(item['cantidad']) for item in inventario.values()) / len(inventario))
+    #Valor total suma todos precios pero primero, multiplica cada precio del producto por su cantidad total, para luego sumar
     valor_total_inventario = sum(item['precio'] * item['cantidad'] for item in inventario.values())
     
     print(f"Producto más caro: {producto_mas_caro} ({inventario[producto_mas_caro]['precio']} CLP)")
