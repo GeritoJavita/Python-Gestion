@@ -27,8 +27,31 @@ for producto in lista_productos:
     inventario[producto] = {'precio': precio, 'cantidad': cantidad}
 
 
+
+#Clasficar los productos
+
+def clasificar_productos(inventario):
+    baratos = []
+    moderados = []
+    caros = []
+
+    for producto, detalles in inventario.items():
+        precio = detalles['precio']
+        if precio < 200000:
+            baratos.append(producto)
+        elif 200000 <= precio <= 400000:
+            moderados.append(producto)
+        else:
+            caros.append(producto)
+     return baratos, moderados,caros
+        
+
+
 os.system("cls")
 print(inventario)
-
+baratos, moderados, caros = clasificar_productos(inventario)
+print(f"Baratos: {baratos}")
+print(f"Moderados: {moderados}")
+print(f"Caros: {caros}")
 
 
