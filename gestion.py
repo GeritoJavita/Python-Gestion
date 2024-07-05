@@ -28,7 +28,7 @@ for producto in lista_productos:
 
 
 
-#Clasficar los productos
+#Clasficar los productos por orden de precios, de los mas baratos a los mas caros
 
 def clasificar_productos(inventario):
     baratos = []
@@ -43,13 +43,31 @@ def clasificar_productos(inventario):
             moderados.append(producto)
         else:
             caros.append(producto)
-     return baratos, moderados,caros
-        
+    return baratos, moderados, caros
 
 
-os.system("cls")
-print(inventario)
+
+# Funcion para ver las con los requisitos obligatorios mencionados
+
+def ver_estadisticas(inventario):
+    producto_mas_caro = max(inventario, key=lambda x: inventario[x]['precio'])
+    producto_mas_barato = min(inventario, key=lambda x: inventario[x]['precio'])
+    promedio_precios = sum(item['precio'] for item in inventario.values()) / len(inventario)
+    geometrica_cantidades = math.exp(sum(math.log(item['cantidad']) for item in inventario.values()) / len(inventario))
+    valor_total_inventario = sum(item['precio'] * item['cantidad'] for item in inventario.values())
+    
+    print(f"Producto más caro: {producto_mas_caro} ({inventario[producto_mas_caro]['precio']} CLP)")
+    print(f"Producto más barato: {producto_mas_barato} ({inventario[producto_mas_barato]['precio']} CLP)")
+    print(f"Promedio de precios: {promedio_precios} CLP")
+    print(f"Media geométrica de las cantidades: {geometrica_cantidades}")
+    print(f"Valor total del inventario: {valor_total_inventario} CLP")
+
+
+
+
+
 baratos, moderados, caros = clasificar_productos(inventario)
+ver_estadisticas(inventario)
 print(f"Baratos: {baratos}")
 print(f"Moderados: {moderados}")
 print(f"Caros: {caros}")
